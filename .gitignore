@@ -1,0 +1,82 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# If you have a custom local settings file
+local_settings.py
+
+# Environment
+.env
+.env.*
+
+# Virtualenv
+venv/
+ENV/
+env/
+.venv/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Migrations - optional, include if you don't want them in version control
+# **/migrations/
+# !**/migrations/__init__.py
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest
+.cache/
+.pytest_cache/
+
+# Build artifacts
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Node modules (if using frontend tools)
+node_modules/
+
