@@ -1,0 +1,36 @@
+name: Django CI/CD to K8s on EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      echo "Docker Login Done..."
+
+    - name: Build and Push Docker image
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/sample_app:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/sample_app:latest
+      echo "Docker Build - Push Done..."
+
+    - name: SSH into EC2 and apply K8s configs
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd /home/ubuntu/django-k8s-cicd  # clone path on EC2
+          git pull origin main
+          kubectl apply -f k8s/deployment.yaml
+
